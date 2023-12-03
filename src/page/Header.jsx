@@ -15,7 +15,7 @@ const Header = () => {
           </Link>
         </Logo>
         <ManuList>
-          <NavMenu>중고거래</NavMenu>
+          <NavMenu to="/fleamarket">중고거래</NavMenu>
           <NavMenu>동네업체</NavMenu>
           <NavMenu>알바</NavMenu>
           <NavMenu>부동산 직거래</NavMenu>
