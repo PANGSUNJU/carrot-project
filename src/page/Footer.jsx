@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AppStore from "../assets/AppStore.svg";
+import StoreBtn from "../component/StoreBtn";
 
 const Footer = () => {
   return (
@@ -26,10 +27,7 @@ const Footer = () => {
         </FooterMenuList>
         <div>
           <p>당근 앱 다운로드</p>
-          <div>
-            <button>App Store</button>
-            <button>Google Play</button>
-          </div>
+          <StoreBtn />
         </div>
       </FooterMenu>
     </FooterWrap>
@@ -41,7 +39,7 @@ export default Footer;
 const FooterWrap = styled.div`
   width: 100%;
   height: 390px;
-  border: 1px solid red;
+  // border: 1px solid red;
 `;
 
 const FooterMenu = styled.div`
