@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    index
+
+    <p>jsonTestForRequestParam</p>
+    <form method="post" action="/jsonTestForRequestParam">
+        <input type="text" name="name">
+        <input type="text" name="age">
+        <button type="submit">submit</button>
+    </form>
+
+    <p>jsonTestForRequestBody 안됨</p>
+    <form method="post" action="/jsonTestForRequestBody">
+        <input type="text" name="name">
+        <input type="text" name="age">
+        <button type="submit">submit</button>
+    </form>
+
+    <p>jsonTestForMultipart 잘됨</p>
+    <form method="post" action="/jsonTestForMultipart" enctype="multipart/form-data">
+        <input type="text" name="name">
+        <input type="text" name="age">
+        <input type="file" name="file" id="file">
+        <button type="submit">submit</button>
+        <button type="button" onclick="postAjaxMultipartReqeust()">postAjaxMultipartReqeust</button>
+    </form>
+
+    <script>
+        function testDataSelectList () {
+            fetch('/testDataSelectList', {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                }
+            }).then(function (response) {
+                console.log("testDataSelectList - response:", response);
+                response.json().then(function (data) {
+                    console.log("testDataSelectList - data:", data);
+                })
+            }).catch(function (error) {
+                console.log("testDataSelectList - error", error)
+            });
+        }
+        testDataSelectList();
+
+
+
+        function getAjaxReqeust () {
+            fetch('/jsonTestForRequestParam?method=GET&title=testTitle&age=30', {
+                method: "GET",
+                headers: {
+                    //'Content-Type': 'multipart/form-data; charset=UTF-8'
+                    //'Content-Type': 'application/json; charset=UTF-8'
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            })
+            .then((response) => response.json())
+            .then((data) => console.log("jsonTestForRequestParam - data:", data))
+            .catch((error) => console.log("jsonTestForRequestParam - error:", error));
+        }
+
+
+
+        function postAjaxReqeust () {
+
+            //이건 안됨
+            /*fetch('/jsonTestForRequestParam', {
+                method: "POST",
+                headers: {
+                    //'Content-Type': 'multipart/form-data; charset=UTF-8'
+                    //'Content-Type': 'application/json; charset=UTF-8'
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    method: "POST",
+                    title: "testTitlePost",
+                    age: 213,
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => console.log("jsonTestForRequestParam - data:", data))
+            .catch((error) => console.log("jsonTestForRequestParam - error:", error));*/
+
+            //이건 잘됨
+            fetch('/jsonTestForRequestBody', {
+                method: "POST",
+                headers: {
+                    //'Content-Type': 'multipart/form-data; charset=UTF-8'
+                    'Content-Type': 'application/json; charset=UTF-8'
+                    //'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    method: "POST",
+                    title: "testTitlePost",
+                    age: 213,
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => console.log("jsonTestForRequestParam - data:", data))
+            .catch((error) => console.log("jsonTestForRequestParam - error:", error));
+        }
+
+        function postAjaxMultipartReqeust () {
+            //이거 잘됨
+            let formData = new FormData();
+            formData.append('method', "POST");
+            formData.append('title', "testTitlePost");
+            formData.append('age', 22);
+            let fileInput = document.getElementById('file');
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append('files', fileInput.files[i]);
+            }
+            //이거 잘됨 (단, progress를 활용 못함)
+            /*fetch('/jsonTestForMultipart', {
+                method: "POST",
+                headers: {
+                    //'Content-Type': 'multipart/form-data' 이거 안됨. 왜 안되냐 하면, fetch api로 formData를 보낼때 헤더를 설정 하지 말아야 하고, 그 이유는 헤더에 자동으로 Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryMJtHYBc9ERyjdAy8 세팅된다고 함
+                    //'Content-Type': 'application/json; charset=UTF-8' 이거 안됨(당연)
+                    //'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' 이거 안됨(당연)
+                },
+                body: formData
+            })
+            .then((response) => response.json())
+            .then((data) => console.log("jsonTestForMultipart - data:", data))
+            .catch((error) => console.log("jsonTestForMultipart - error:", error));*/
+
+            //이거 잘됨 (progress 활용 가능)
+            let request = new XMLHttpRequest();
+            request.open('POST', '/jsonTestForMultipart');
+            // upload progress event
+            request.upload.addEventListener('progress', function(e) {
+                // upload progress as percentage
+                let percent_completed = (e.loaded / e.total)*100;
+                console.log(percent_completed);
+            });
+            // request finished event
+            request.addEventListener('load', function(e) {
+                // HTTP status message (200, 404 etc)
+                console.log('request.status : ', request.status);
+
+                // request.response holds response from the server
+                console.log('request.response : ', request.response);
+            });
+            // send POST request to server
+            request.send(formData);
+        }
+
+        //getAjaxReqeust();
+        //postAjaxReqeust();
+    </script>
+</body>
+</html>
