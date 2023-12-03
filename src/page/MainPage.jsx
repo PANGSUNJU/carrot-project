@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+
+import StoreBtn from "../component/StoreBtn";
 import Character from "../assets/img/mainCharacter.webp";
 
 const MainPage = () => {
@@ -14,10 +16,7 @@ const MainPage = () => {
           </TitleText>
           <p>동네라서 가능한 모든 것</p>
           <p>당근에서 가까운 이웃과 함께해요.</p>
-          <div>
-            <button>Google Play</button>
-            <button>App Store</button>
-          </div>
+          <StoreBtn />
         </TitleWrap>
         <ImgDiv>
           <ImgChar src={Character} />
@@ -33,6 +32,7 @@ const MainTop = styled.div`
   background-color: #fffae0;
   height: 719px;
   display: flex;
+  width: 100%;
 `;
 
 const TitleWrap = styled.div`
@@ -50,7 +50,7 @@ const TitleText = styled.p`
 `;
 
 const ImgDiv = styled.div`
-  border: 1px solid red;
+  // border: 1px solid red;
   width: 50%;
   height: 100%;
 `;

@@ -39,7 +39,7 @@ const HeaderWrap = styled.div`
   width: 100%;
   display: flex;
   // background-color: coral;
-  border: 1px solid red;
+  // border: 1px solid red;
   // color: white;
   justify-content: space-between;
   align-content: center;
