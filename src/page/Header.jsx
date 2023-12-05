@@ -11,7 +11,7 @@ const Header = () => {
       <MenuWrap>
         <Logo>
           <Link to="/">
-            <img src={CarrotLogo} />
+            <LogoImg src={CarrotLogo}/>
           </Link>
         </Logo>
         <NavWrap>
@@ -64,9 +64,9 @@ const HeaderWrap = styled.div`
   z-index: 999;
 `;
 const MenuWrap = styled.div`
-  max-width: 95rem;
-  padding: 1.2rem 2rem;
-  height: 6.4rem;
+  max-width: 75rem;
+  padding: 12px 20px;
+  // height: 40px;
   box-sizing: border-box;
   justify-content: space-between;
   width: 100%;
@@ -74,6 +74,12 @@ const MenuWrap = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  margin: 0 auto;
+`;
+const LogoImg = styled.img`
+  width: 65px;
+  height: 36px;
+  fill: none;
 `;
 const Logo = styled.a`
   display: inline-flex;
@@ -103,10 +109,10 @@ const MenuLink = styled(Link)`
   line-height: 1.32;
   font-size: 1.2rem;
   letter-spacing: -2%;
-  color:black;
+  color:#4d5159;
   font-weight: 700;
   font-style: normal;
-  margin-right: 3rem;
+  margin-right: 1.2rem;
   text-decoration: none;
   cursor: pointer;
 `;
@@ -125,30 +131,28 @@ const SearchForm = styled.form`
   margin-right: 1.2rem;
 `;
 const SearchInput = styled.input`
-  line-height: 1.36;
-  font-size: 1.6rem;
-  letter-spacing: -1%;
-  background-color: var(--seed-scale-color-gray-100);
-  box-sizing: border-box;
-  height: 4rem;
-  padding: 0.9rem 1.2rem;
+  width: 288px;
+  height: 40px;
   border: none;
-  border-radius: 0.6rem;
-  width: 100%;
-  color: var(--seed-scale-color-gray-900);
+  border-radius: 10px;
+  background-color: #f2f3f6;
+  color : B1B4BB;
+  font-weight: bold;
+  padding-left: 1rem;
+  @media screen and (max-width: 1000px) {
+  display: none;
 `;
 
 const MenuBtn = styled.button`
-display: none;
+  display: none;
 `;
 const ChatBtn = styled.button`
-  line-height: 1.3;
-  font-size: 1.6rem;
-  letter-spacing: -2%;
-  display: block;
-  white-space: nowrap;
-  background-color: var(--seed-scale-color-gray-00);
-  color: var(--seed-scale-color-gray-900);
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
+  width: 100px;
+  background-color: white;
+  border: 1px solid #d7d8dd;
+  height: 40px;
+  // margin: 0 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
 `;

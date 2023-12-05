@@ -266,8 +266,10 @@ object-fit: cover;
 `;
 
 const FleamarketArticleList = styled.section`
+  max-width: 50rem;
   padding-top: 64px;
   display: block;
+  margin: 0 auto;
 `;
 const ArticleListTitle = styled.h1`
 font-size: 32px;
