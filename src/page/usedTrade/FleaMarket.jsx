@@ -192,7 +192,6 @@ export default FleaMarket;
 const FleamarketCover = styled.section`
   background-color: #FFF1AA;
   height: 315px;
-  // display: flex;
   display: block;
   padding: 0 16px 0 16px;
 `;

@@ -1,9 +1,9 @@
 .App {
-  width: 1440px;
+  /* width: 1440px;
   margin: 0 auto;
   @media screen and (max-width: 1440px) {
     justify-content: flex-start;
-  }
+  } */
 }
 /* 
 .App-logo {
